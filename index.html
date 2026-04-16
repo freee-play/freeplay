@@ -329,104 +329,232 @@ footer{text-align:center;padding:1.5rem 2rem;border-top:1px solid var(--border);
 const POPULAR_NAMES = ['There Is No Game','Drive Mad','Grindcraft','Subway Surfers','OvO','Boxel Rebound'];
 const TRENDING_NAMES = ['Krunker','Happy Wheels','Grindcraft','Friday Night Funkin','Pandemic 2'];
 const GAMES = [
-  { name:"2048",                  cat:"puzzle",   emoji:"🔢", stars:"★★★★★", path:"games/2048/index.html",                      bg:"#1a1a2e", thumb:"2048.png",              desc:"Slide tiles to reach 2048. Simple to learn, impossible to put down." },
+
+{ name:"2048",                  cat:"puzzle",   emoji:"🔢", stars:"★★★★★", path:"games/2048/index.html",                      bg:"#1a1a2e", thumb:"2048.png",              desc:"Slide tiles to reach 2048. Simple to learn, impossible to put down." },
+
   { name:"Snake",                 cat:"arcade",   emoji:"🐍", stars:"★★★★☆", path:"games/snake/index.html",                     bg:"#0f2a1a", thumb:"snake.png",             desc:"Guide your snake to eat and grow without hitting yourself." },
+
   { name:"Retro Bowl",            cat:"action",   emoji:"🏈", stars:"★★★★★", path:"games/retro-bowl/index.html",                bg:"#2a0a0a", thumb:"retro-bowl.png",        desc:"Run your own football team in this addictive retro sports game." },
+
   { name:"Wordle",                cat:"puzzle",   emoji:"🟩", stars:"★★★★★", path:"games/wordle/index.html",                    bg:"#1a2a1a", thumb:"wordle.png",            desc:"Guess the 5-letter word in 6 tries. A new puzzle every day." },
+
   { name:"Chess",                 cat:"strategy", emoji:"♟️", stars:"★★★★★", path:"games/chess/index.html",                     bg:"#0d1a0d", thumb:"chess.png",             desc:"The classic game of strategy. Play against a challenging AI." },
+
   { name:"Pacman",                cat:"arcade",   emoji:"🟡", stars:"★★★★★", path:"games/pacman/index.html",                    bg:"#1a1a00", thumb:"pacman.png",            desc:"Chomp pellets and dodge ghosts in this timeless arcade classic." },
+
   { name:"Tiny Fishing",          cat:"idle",     emoji:"🎣", stars:"★★★★☆", path:"games/tiny-fishing/index.html",              bg:"#0a1a2a", thumb:"tiny-fishing.png",      desc:"Cast your line and reel in fish to upgrade your gear. Very relaxing." },
+
   { name:"Friday Night Funkin",   cat:"arcade",   emoji:"🎵", stars:"★★★★★", path:"games/fridaynightfunkin/index.html",         bg:"#1a0a2a", thumb:"fridaynightfunkin.png", desc:"Hit the arrows to the beat in this wildly popular rhythm game." },
+
   { name:"Osu",                   cat:"arcade",   emoji:"🎯", stars:"★★★★★", path:"games/osu/index.html",                       bg:"#1a0a1a", thumb:"osu.png",               desc:"Click circles to the beat. Simple concept, insane skill ceiling." },
+
   { name:"HexGL",                 cat:"action",   emoji:"🚀", stars:"★★★★★", path:"games/HexGL/index.html",                    bg:"#0a1a2a", thumb:"hexgl.png",             desc:"Futuristic racing at breakneck speeds through neon corridors." },
+
   { name:"Spelunky",              cat:"action",   emoji:"⛏️", stars:"★★★★★", path:"games/spelunky/index.html",                  bg:"#2a1a00", thumb:"spelunky.png",          desc:"Explore deadly caves full of traps and treasure. Every run is different." },
+
   { name:"There Is No Game",      cat:"puzzle",   emoji:"🤫", stars:"★★★★★", path:"games/there-is-no-game/index.html",          bg:"#0a0a1a", thumb:"there-is-no-game.png",  desc:"A game that insists it isn't a game. Hilarious and surprisingly deep.", isNew:true },
+
   { name:"Sandboxels",            cat:"idle",     emoji:"⚗️", stars:"★★★★★", path:"games/sandboxels/index.html",                bg:"#1a1a1a", thumb:"sandboxels.png",        desc:"A falling sand simulator with tons of elements to experiment with." },
+
   { name:"Krunker",               cat:"action",   emoji:"🔫", stars:"★★★★★", path:"games/krunker/index.html",                   bg:"#1a1a0a", thumb:"krunker.png",           desc:"Fast-paced browser FPS. Jump, shoot, and dominate the leaderboard." },
+
   { name:"Drive Mad",             cat:"action",   emoji:"🚗", stars:"★★★★☆", path:"games/drive-mad/index.html",                 bg:"#2a1a0a", thumb:"drive-mad.png",         desc:"Navigate insane obstacle courses without flipping your vehicle.", isNew:true },
+
   { name:"Grindcraft",            cat:"idle",     emoji:"⛏️", stars:"★★★★☆", path:"games/grindcraft/index.html",                bg:"#1a2a0a", thumb:"grindcraft.png",        desc:"Mine resources and craft items in this satisfying idle clicker.", isNew:true },
+
   { name:"A Dark Room",           cat:"idle",     emoji:"🕯️", stars:"★★★★★", path:"games/adarkroom/index.html",                 bg:"#0a0a0a", thumb:"adarkroom.png",         desc:"A mysterious text adventure that slowly reveals a bigger world." },
+
   { name:"Pandemic 2",            cat:"strategy", emoji:"🦠", stars:"★★★★★", path:"games/pandemic2/index.html",                 bg:"#0a1a0a", thumb:"pandemic2.png",         desc:"Evolve a deadly pathogen and wipe out humanity. Disturbingly fun." },
+
   { name:"Line Rider",            cat:"arcade",   emoji:"🛷", stars:"★★★★☆", path:"games/line-rider/index.html",                bg:"#1a1a1a", thumb:"line-rider.png",        desc:"Draw tracks for your little sledder to ride. Physics madness." },
+
   { name:"Hacker Typer",          cat:"arcade",   emoji:"💻", stars:"★★★★☆", path:"games/hackertype/index.html",                bg:"#0a1a0a", thumb:"hackertype.png",        desc:"Type anything and look like a Hollywood hacker. Great for trolling." },
+
   { name:"Geometry Dash",         cat:"action",   emoji:"🔺", stars:"★★★★★", path:"games/geometrydash/index.html",              bg:"#2a0a1a", thumb:"geometrydash.png",      desc:"Jump and fly through razor-sharp obstacles to the beat of the music." },
+
   { name:"Happy Wheels",          cat:"action",   emoji:"🩸", stars:"★★★★★", path:"games/happy-wheels/index.html",              bg:"#2a0a0a", thumb:"happy-wheels.png",      desc:"Ragdoll physics mayhem. Choose a character and survive the chaos." },
+
   { name:"Age of War",            cat:"strategy", emoji:"⚔️", stars:"★★★★★", path:"games/age-of-war/index.html",                bg:"#2a1a00", thumb:"age-of-war.png",        desc:"Evolve your civilization through the ages and crush your enemies." },
+
   { name:"BTD4",                  cat:"strategy", emoji:"🎈", stars:"★★★★★", path:"games/btd4/index.html",                      bg:"#1a2a0a", thumb:"btd4.png",              desc:"Pop bloons with towers before they reach the end. Tower defense at its best." },
+
   { name:"Learn To Fly",          cat:"action",   emoji:"🐧", stars:"★★★★☆", path:"games/learntofly/index.html",                bg:"#0a1a2a", thumb:"learntofly.png",        desc:"A determined penguin learns to fly. Upgrade and launch further each time." },
+
   { name:"Doodle Jump",           cat:"arcade",   emoji:"👾", stars:"★★★★☆", path:"games/doodle-jump/index.html",               bg:"#1a2a1a", thumb:"doodle-jump.png",       desc:"Bounce higher and higher on platforms without falling. Endlessly fun." },
+
   { name:"Subway Surfers",        cat:"action",   emoji:"🏄", stars:"★★★★★", path:"games/subway-surfers/index.html",            bg:"#2a0a2a", thumb:"subway-surfers.png",    desc:"Sprint through the subway, dodge trains and collect coins.", isNew:true },
+
   { name:"Among Us",              cat:"strategy", emoji:"🔴", stars:"★★★★★", path:"games/among-us/index.html",                  bg:"#1a0a2a", thumb:"among-us.png",          desc:"Find the impostor among your crewmates before it's too late." },
+
   { name:"OvO",                   cat:"action",   emoji:"🏃", stars:"★★★★★", path:"games/ovo/index.html",                       bg:"#1a1a1a", thumb:"ovo.png",               desc:"Precision platformer with slick movement mechanics. Very satisfying.", isNew:true },
+
   { name:"Boxel Rebound",         cat:"action",   emoji:"📦", stars:"★★★★☆", path:"games/boxel-rebound/index.html",             bg:"#0a1a2a", thumb:"boxel-rebound.png",     desc:"Bounce through tricky levels in this tight and responsive platformer.", isNew:true },
+
   { name:"Tube Jumpers",          cat:"arcade",   emoji:"🎮", stars:"★★★★☆", path:"games/tube-jumpers/index.html",              bg:"#2a0a1a", thumb:"tube-jumpers.png",      desc:"Jump between tubes and knock opponents off. Chaotic multiplayer fun." },
+
   { name:"Crossy Road",           cat:"arcade",   emoji:"🐔", stars:"★★★★☆", path:"games/crossyroad/index.html",               bg:"#1a2a0a", thumb:"crossyroad.png",        desc:"Hop across roads and rivers without getting squashed. Endless fun." },
+
   { name:"Idle Breakout",         cat:"idle",     emoji:"🧱", stars:"★★★★☆", path:"games/idle-breakout/index.html",            bg:"#0a1a2a", thumb:"idle-breakout.png",      desc:"Brick breaking meets idle clicker. Upgrade your balls and destroy everything." },
+
   { name:"Bloxors",               cat:"puzzle",   emoji:"📦", stars:"★★★★☆", path:"games/bloxors/index.html",                  bg:"#1a1a2a", thumb:"bloxors.png",           desc:"Roll a block to the hole without falling off. Deceptively tricky." },
+
   { name:"Firewater",             cat:"puzzle",   emoji:"🔥", stars:"★★★★☆", path:"games/firewater/index.html",                bg:"#2a0a0a", thumb:"firewater.png",         desc:"Guide fire and water to their goals in this clever elemental puzzler." },
+
   { name:"Paper.io 2",            cat:"action",   emoji:"📄", stars:"★★★★☆", path:"games/paperio2/index.html",                 bg:"#1a1a2a", thumb:"paperio2.png",          desc:"Expand your territory by drawing loops. Don't let anyone cut your trail." },
+
   { name:"Stickman",              cat:"action",   emoji:"🏃", stars:"★★★★☆", path:"games/stickman/index.html",                 bg:"#1a1a1a", thumb:"stickman.png",          desc:"Classic stickman action platformer with slick moves." },
+
   { name:"Cubefield",             cat:"action",   emoji:"🔷", stars:"★★★★☆", path:"games/cubefield/index.html",                bg:"#0a0a2a", thumb:"cubefield.png",         desc:"Dodge an endless field of cubes at increasing speeds." },
+
   { name:"Asteroids",             cat:"arcade",   emoji:"☄️", stars:"★★★★☆", path:"games/asteroids/index.html",                bg:"#0a0a1a", thumb:"asteroids.png",         desc:"Blast asteroids in space before they destroy your ship." },
+
   { name:"Breakout",              cat:"arcade",   emoji:"🧱", stars:"★★★★☆", path:"games/breakout/index.html",                 bg:"#1a0a2a", thumb:"breakout.png",          desc:"Classic brick breaking action. Don't let the ball drop." },
+
   { name:"Trimps",                cat:"idle",     emoji:"👾", stars:"★★★★☆", path:"games/trimps/index.html",                   bg:"#1a1a2a", thumb:"trimps.png",            desc:"Raise an army of Trimps and battle your way through an infinite world." },
+
   { name:"Stickman Boost",        cat:"action",   emoji:"🏃", stars:"★★★★☆", path:"games/stickman-boost/index.html",           bg:"#0a1a1a", thumb:"stickman-boost.png",    desc:"Run, jump and boost through insane obstacle courses." },
+
   { name:"Q1K3",                  cat:"action",   emoji:"🔫", stars:"★★★★☆", path:"games/q1k3/index.html",                     bg:"#1a0a0a", thumb:"q1k3.png",              desc:"A tiny but fully featured FPS built in 13kb. Incredibly impressive." },
+
   { name:"Gun Mayhem",            cat:"action",   emoji:"💥", stars:"★★★★☆", path:"games/gun-mayhem/index.html",               bg:"#2a0a1a", thumb:"gun-mayhem.png",        desc:"Knock opponents off platforms with guns. Wild party game chaos." },
+
   { name:"Hextris",               cat:"puzzle",   emoji:"🔶", stars:"★★★★☆", path:"games/hextris/index.html",                  bg:"#1a1a0a", thumb:"hextris.png",           desc:"Tetris meets a hexagon. Match colors before the blocks stack up." },
+
   { name:"Underrun",              cat:"action",   emoji:"🚀", stars:"★★★★☆", path:"games/underrun/index.html",                 bg:"#0a0a2a", thumb:"underrun.png",          desc:"Survive waves of enemies in this minimalist space shooter." },
+
   { name:"Just One Boss",         cat:"action",   emoji:"👹", stars:"★★★★☆", path:"games/just-one-boss/index.html",            bg:"#2a0a0a", thumb:"just-one-boss.png",     desc:"One massive boss fight with tons of phases. Epic and intense." },
+
   { name:"Core Ball",             cat:"arcade",   emoji:"⚽", stars:"★★★★☆", path:"games/core-ball/index.html",                bg:"#0a1a2a", thumb:"core-ball.png",         desc:"Shoot balls into a spinning core without hitting the spikes." },
+
   { name:"Pixel Cave",            cat:"action",   emoji:"⛏️", stars:"★★★★☆", path:"games/pixel-cave/index.html",               bg:"#1a1a0a", thumb:"pixel-cave.png",        desc:"Mine through pixel caves and discover what lies beneath." },
+
   { name:"Stick War",             cat:"strategy", emoji:"⚔️", stars:"★★★★★", path:"games/stickwar/index.html",                 bg:"#1a1a1a", thumb:"stickwar.png",          desc:"Command an army of stickmen and conquer enemy nations." },
+
   { name:"Tower Master",          cat:"strategy", emoji:"🗼", stars:"★★★★☆", path:"games/towermaster/index.html",              bg:"#2a1a0a", thumb:"towermaster.png",       desc:"Build the tallest tower you can without it toppling over." },
+
   { name:"N-Gon",                 cat:"arcade",   emoji:"🔺", stars:"★★★★☆", path:"games/n-gon/index.html",                    bg:"#0a0a1a", thumb:"n-gon.png",             desc:"Avoid shapes in this minimalist geometric arcade game." },
+
   { name:"Polybranch",            cat:"arcade",   emoji:"🌿", stars:"★★★★☆", path:"games/polybranch/index.html",               bg:"#0a1a0a", thumb:"polybranch.png",        desc:"Navigate through branching geometric shapes. Hypnotic and beautiful." },
+
   { name:"Shards",                cat:"arcade",   emoji:"💎", stars:"★★★★☆", path:"games/shards/index.html",                   bg:"#0a0a2a", thumb:"shards.png",            desc:"Break crystals in this satisfying minimalist shooter." },
+
   { name:"ASCII Space",           cat:"arcade",   emoji:"🚀", stars:"★★★★☆", path:"games/asciispace/index.html",               bg:"#0a0a0a", thumb:"asciispace.png",        desc:"A space shooter made entirely from ASCII characters. Retro cool." },
+
   { name:"Goodnight",             cat:"puzzle",   emoji:"🌙", stars:"★★★★☆", path:"games/goodnight/index.html",                bg:"#0a0a1a", thumb:"goodnight.png",         desc:"A short relaxing puzzle game about putting things to sleep." },
+
   { name:"Stickman Dismount",     cat:"action",   emoji:"🏃", stars:"★★★★☆", path:"games/stickman-dismount/index.html",        bg:"#1a1a1a", thumb:"stickman-dismount.png", desc:"Ragdoll your stickman into obstacles as violently as possible." },
+
   { name:"Stickman Golf",         cat:"arcade",   emoji:"⛳", stars:"★★★★☆", path:"games/stickman-golf/index.html",            bg:"#0a1a0a", thumb:"stickman-golf.png",     desc:"Mini golf with a stickman twist. Tricky holes and fun physics." },
+
   { name:"Tank Trouble 2",        cat:"action",   emoji:"🪖", stars:"★★★★☆", path:"games/tank-trouble-2/index.html",           bg:"#2a1a0a", thumb:"tank-trouble-2.png",    desc:"Navigate maze-like arenas and blast other tanks. Great multiplayer." },
+
   { name:"Stick Archers Battle",  cat:"action",   emoji:"🏹", stars:"★★★★☆", path:"games/stick-archers-battle/index.html",    bg:"#1a0a0a", thumb:"stick-archers.png",     desc:"Duel other stick archers. One shot, one kill." },
+
   { name:"Cannon Basketball 4",   cat:"arcade",   emoji:"🏀", stars:"★★★★☆", path:"games/cannon-basketball-4/index.html",     bg:"#2a1a00", thumb:"cannon-basketball.png",  desc:"Launch basketballs into hoops using cannons and physics." },
+
   { name:"Basketball Legends",    cat:"action",   emoji:"🏀", stars:"★★★★★", path:"games/basketball-legends-2020/index.html", bg:"#0a1a2a", thumb:"basketball-legends.png", desc:"1v1 basketball with legendary players. Fast and addictive." },
+
   { name:"Slope Ball",            cat:"action",   emoji:"🔵", stars:"★★★★☆", path:"games/slope-ball/index.html",               bg:"#0a0a2a", thumb:"slope-ball.png",        desc:"Roll a ball down an endless slope without falling off the edge." },
+
   { name:"Geo Dash 2",            cat:"action",   emoji:"🔺", stars:"★★★★☆", path:"games/geodash-2/index.html",                bg:"#2a0a1a", thumb:"geodash2.png",          desc:"More geometry dash levels with new obstacles and music." },
+
   { name:"Burning Man 2",         cat:"action",   emoji:"🔥", stars:"★★★★☆", path:"games/burning-man-2/index.html",            bg:"#2a0a00", thumb:"burning-man-2.png",     desc:"Survive waves of enemies using fire and explosions." },
+
   { name:"Boxhead 2Play",         cat:"action",   emoji:"🧟", stars:"★★★★☆", path:"games/boxhead2play/index.html",             bg:"#1a0a0a", thumb:"boxhead.png",           desc:"Defend against zombie hordes with an arsenal of weapons." },
+
   { name:"Creative Kill Chamber", cat:"action",   emoji:"💀", stars:"★★★★☆", path:"games/creativekillchamber/index.html",      bg:"#0a0a0a", thumb:"creativekill.png",      desc:"Escape deadly rooms using creative and brutal methods." },
+
   { name:"Short Life 2",          cat:"action",   emoji:"💥", stars:"★★★★☆", path:"games/short-life-2/index.html",             bg:"#1a1a0a", thumb:"short-life-2.png",      desc:"Guide a ragdoll through deadly obstacle courses without losing limbs." },
+
   { name:"Portal Flash",          cat:"puzzle",   emoji:"🌀", stars:"★★★★★", path:"games/portalflash/index.html",              bg:"#0a1a2a", thumb:"portalflash.png",       desc:"The original flash Portal game. Place portals to solve mind-bending puzzles." },
+
   { name:"Learn To Fly 2",        cat:"action",   emoji:"🐧", stars:"★★★★★", path:"games/learntofly2/index.html",              bg:"#0a1a2a", thumb:"learntofly2.png",       desc:"The penguin returns with bigger rockets and more upgrades." },
+
   { name:"BTTS",                  cat:"arcade",   emoji:"⚽", stars:"★★★★☆", path:"games/btts/index.html",                     bg:"#0a2a0a", thumb:"btts.png",              desc:"Both teams to score — a fun football prediction game." },
+
   { name:"Defend The Tank",       cat:"strategy", emoji:"🪖", stars:"★★★★☆", path:"games/defend-the-tank/index.html",          bg:"#1a2a0a", thumb:"defend-tank.png",       desc:"Protect your tank from waves of enemies using turrets and upgrades." },
+
   { name:"Color Switch 2",        cat:"arcade",   emoji:"🌈", stars:"★★★★☆", path:"games/color-switch-2-challenges/index.html",bg:"#1a0a2a", thumb:"color-switch.png",      desc:"Pass through obstacles only when your color matches. Tricky!" },
-{ name:"Getting Over It",      cat:"action",  emoji:"🪣", stars:"★★★★★", path:"games/getting-over-it/index.html",    bg:"#1a0a0a", thumb:"getting-over-it.png", desc:"Climb a mountain with a hammer. Brutally hard and oddly satisfying." },
-{ name:"The Impossible Quiz",  cat:"puzzle",  emoji:"❓", stars:"★★★★★", path:"games/the-impossible-quiz/index.html",bg:"#1a1a0a", thumb:"the-impossible-quiz.png", desc:"Trick questions and absurd logic. Nothing is as it seems." },
+
+  { name:"Getting Over It",      cat:"action",  emoji:"🪣", stars:"★★★★★", path:"games/getting-over-it/index.html",    bg:"#1a0a0a", thumb:"getting-over-it.png", desc:"Climb a mountain with a hammer. Brutally hard and oddly satisfying." },
+
 { name:"Flappy Bird",          cat:"arcade",  emoji:"🐦", stars:"★★★★☆", path:"games/flappy-bird/index.html",        bg:"#0a1a2a", thumb:"flappy-bird.png", desc:"Tap to keep the bird flying. Deceptively simple, incredibly frustrating." },
+
 { name:"Superhot",             cat:"action",  emoji:"🔴", stars:"★★★★★", path:"games/superhot/index.html",           bg:"#1a0a0a", thumb:"superhot.png", desc:"Time moves only when you move. The most innovative shooter in years." },
+
 { name:"Townscaper",           cat:"idle",    emoji:"🏘️", stars:"★★★★★", path:"games/townscaper/index.html",         bg:"#0a1a2a", thumb:"townscaper.png", desc:"Click to build colorful towns. Relaxing and beautiful city builder." },
+
 { name:"Binding of Isaac",     cat:"action",  emoji:"😢", stars:"★★★★★", path:"games/binding-of-isaac/index.html",   bg:"#1a0a0a", thumb:"binding-of-isaac.png", desc:"The original flash roguelike. Dark, deep and endlessly replayable." },
+
 { name:"Time Shooter 3",       cat:"action",  emoji:"⏱️", stars:"★★★★★", path:"games/time-shooter-3/index.html",    bg:"#0a0a1a", thumb:"time-shooter-3.png", desc:"Slow motion FPS where time moves when you do. Mind bending." },
+
 { name:"Gun Mayhem 2",         cat:"action",  emoji:"💥", stars:"★★★★★", path:"games/gun-mayhem-2/index.html",       bg:"#2a0a1a", desc:"More guns, more chaos. Knock opponents off platforms in this sequel." },
+
 { name:"Awesome Tanks 2",       cat:"action",  emoji:"🪖", stars:"★★★★☆", path:"games/awesome-tanks-2/index.html",       bg:"#1a2a0a", desc:"Upgrade your tank and blast through increasingly tough levels." },
+
 { name:"Space Company",         cat:"idle",    emoji:"🚀", stars:"★★★★★", path:"games/space-company/index.html",         bg:"#0a0a1a", desc:"Build rockets and colonize the universe in this epic idle game." },
+
 { name:"Impossible Quiz 2",     cat:"puzzle",  emoji:"❓", stars:"★★★★★", path:"games/the-impossible-quiz-2/index.html", bg:"#1a1a0a", desc:"Even more absurd trick questions. Harder and funnier than the first." },
+
 { name:"Fancy Pants Adventures",cat:"action",  emoji:"🏃", stars:"★★★★★", path:"games/fancypantsadventures/index.html",  bg:"#2a1a00", desc:"Smooth flowing platformer with a stick figure in fancy pants." },
+
 { name:"Cookie Clicker",        cat:"idle",    emoji:"🍪", stars:"★★★★★", path:"games/cookie-clicker/index.html",        bg:"#2a1a00", desc:"Click cookies, buy upgrades, ascend to cookie godhood." },
+
 { name:"Doge Miner 2",          cat:"idle",    emoji:"🐕", stars:"★★★★☆", path:"games/doge-miner-2/index.html",          bg:"#1a1a0a", desc:"Mine to the moon with doge. Such idle, very upgrade, wow." },
+
 { name:"My Friend Pedro",       cat:"action",  emoji:"🍌", stars:"★★★★★", path:"games/my-friend-pedro/index.html",       bg:"#1a0a1a", desc:"Slow motion gun ballet with a talking banana. Absolutely wild." },
+
 { name:"Run 3",                 cat:"action",  emoji:"🏃", stars:"★★★★★", path:"games/run-3/index.html",                 bg:"#0a0a1a", desc:"Run through space tunnels and don't fall through the gaps." },
+
 { name:"Bloons TD 1",           cat:"strategy",emoji:"🎈", stars:"★★★★☆", path:"games/bloonstd/index.html",              bg:"#1a2a0a", desc:"The original bloons tower defense. Pop every last balloon." },
+
 { name:"Bloons TD 2",           cat:"strategy",emoji:"🎈", stars:"★★★★☆", path:"games/bloonstd2/index.html",             bg:"#1a2a0a", desc:"More towers, more bloons, more chaos. Better than the original." },
+
 { name:"Helicopter",            cat:"arcade",  emoji:"🚁", stars:"★★★★☆", path:"games/helicopter/index.html",            bg:"#0a1a2a", desc:"Hold to go up, release to go down. Don't hit the walls." },
+
 { name:"Interactive Buddy",     cat:"idle",    emoji:"😊", stars:"★★★★☆", path:"games/interactivebuddy/index.html",      bg:"#1a0a2a", desc:"Throw things at your buddy. Strangely satisfying stress relief." },
+
 { name:"The Impossible Quiz",   cat:"puzzle",  emoji:"❓", stars:"★★★★★", path:"games/impossiblequiz/index.html",        bg:"#1a1a0a", desc:"Trick questions and absurd logic. Nothing is as it seems." },
+
 { name:"Chrome Dino",           cat:"arcade",  emoji:"🦕", stars:"★★★★☆", path:"games/chrome-dino/index.html",           bg:"#1a1a1a", desc:"The classic offline Chrome dinosaur game. Jump the cacti!" },
+
 { name:"Wolfenstein 3D",        cat:"action",  emoji:"🔫", stars:"★★★★★", path:"games/wolf3d/index.html",                bg:"#2a0a0a", desc:"The grandfather of FPS games. Shoot nazis in a retro 3D maze." },
+
 { name:"Minesweeper",           cat:"puzzle",  emoji:"💣", stars:"★★★★☆", path:"games/minesweeper/index.html",           bg:"#1a1a1a", desc:"Classic Windows puzzle. Flag the mines without blowing up." },
+
 { name:"Solitaire",             cat:"puzzle",  emoji:"🃏", stars:"★★★★☆", path:"games/solitaire/index.html",             bg:"#0a1a0a", desc:"The classic card game. Stack them up and clear the board." },
+
+  { name:"Ballz", cat:"arcade", emoji:"🔵", stars:"★★★★☆", path:"ballz.html", bg:"#0a1a2a", desc:"Break blocks with bouncing balls and rack up huge combos in this addictive arcade challenge." },
+
+  { name:"BitLife", cat:"simulation", emoji:"📱", stars:"★★★★★", path:"bitlife.html", bg:"#1a0a1a", desc:"Live a full virtual life—make choices, build a career, and see where your decisions take you." },
+
+  { name:"Cubes 2048", cat:"puzzle", emoji:"🧊", stars:"★★★★☆", path:"cubes2048.html", bg:"#0a2a1a", desc:"Merge cubes and grow your score in this satisfying twist on the classic 2048 formula." },
+
+  { name:"Drive Mad", cat:"racing", emoji:"🚗", stars:"★★★★★", path:"drivemad.html", bg:"#2a0a0a", desc:"Control tricky vehicles across wild obstacles without flipping over—precision is everything." },
+
+  { name:"Elastic Man", cat:"funny", emoji:"😂", stars:"★★★★☆", path:"elastic.html", bg:"#2a1a0a", desc:"Stretch and pull a weird elastic face with realistic physics for endless goofy fun." },
+
+  { name:"Fluid Simulation", cat:"sandbox", emoji:"🌊", stars:"★★★★☆", path:"fluid.html", bg:"#0a1a2a", desc:"Relax with mesmerizing flowing particles in a calming interactive fluid simulator." },
+
+  { name:"Getaway Shootout", cat:"multiplayer", emoji:"🔫", stars:"★★★★★", path:"getawayshootout.html", bg:"#1a0a0a", desc:"Race and fight using chaotic physics-based movement and crazy weapons." },
+
+  { name:"GunSpin", cat:"arcade", emoji:"🔫", stars:"★★★★☆", path:"gunspin.html", bg:"#2a0a1a", desc:"Shoot to propel your gun forward and travel as far as possible." },
+
+  { name:"Pokemon Fire Red", cat:"adventure", emoji:"🔥", stars:"★★★★★", path:"pokemonfirered.html", bg:"#2a0a0a", desc:"Explore Kanto, catch Pokémon, and become a champion in this classic adventure." },
+
+  { name:"Pokemon Leaf Green", cat:"adventure", emoji:"🍃", stars:"★★★★★", path:"pokemonleaf.html", bg:"#0a2a0a", desc:"Catch, train, and battle Pokémon through the Kanto region journey." },
+
+  { name:"Pokemon Sapphire", cat:"adventure", emoji:"💧", stars:"★★★★★", path:"pokemonsapphire.html", bg:"#0a1a2a", desc:"Travel through Hoenn and battle your way to become the Pokémon champion." },
+
+  { name:"Rooftop Snipers", cat:"multiplayer", emoji:"🎯", stars:"★★★★★", path:"rooftopsniper.html", bg:"#1a1a1a", desc:"Chaotic rooftop duels where timing and physics decide the winner." },
+
+  { name:"Slope", cat:"arcade", emoji:"🟢", stars:"★★★★★", path:"slope.html", bg:"#0a0a0a", desc:"Roll down a neon slope at high speed while dodging obstacles." },
+
+  { name:"Snow Rider", cat:"sports", emoji:"❄️", stars:"★★★★☆", path:"snowrider.html", bg:"#0a1a2a", desc:"Ride your sled down snowy hills while avoiding obstacles and collecting gifts." },
+
+  { name:"Tomb of the Mask", cat:"arcade", emoji:"🟨", stars:"★★★★★", path:"tombofthemas.html", bg:"#1a0a2a", desc:"Dash through vertical mazes at lightning speed while avoiding traps." },
+
+  { name:"We Become What We Behold", cat:"story", emoji:"📸", stars:"★★★★★", path:"we_become_what_we_behold.html", bg:"#2a2a2a", desc:"A powerful game about media influence and how society reacts to fear." }
 ];
 const SERIES = [
   {
@@ -467,7 +595,7 @@ const SERIES = [
   },
 ];
 const ALL_SERIES_GAMES = SERIES.flatMap(s => s.games.map(g => ({...g, seriesName: s.name})));
-const ALL_GAMES = [...GAMES, ...ALL_SERIES_GAMES];
+const ALL_GAMES = [...GAMES, ...ALL_SERIES_GAMES,];
 const ACHIEVEMENTS_DEF = [
   { id:'first_game',  icon:'🎮', name:'First Game',   desc:'Play your first game',         check: s => s.gamesPlayed >= 1 },
   { id:'on_fire',     icon:'🔥', name:'On Fire',       desc:'Play 5 games in one session',  check: s => s.gamesPlayed >= 5 },
