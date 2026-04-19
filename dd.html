@@ -229,9 +229,8 @@ footer{text-align:center;padding:1.5rem 2rem;border-top:1px solid var(--border);
     <div class="header-row">
       <div class="search-wrap">
         <span class="search-icon">⌕</span>
-        <input type="text" id="search" placeholder="Search games..." <input type="text" id="search" placeholder="Search games..." oninput="debouncedFilter()">
+        <input type="text" id="search" placeholder="Search games..." oninput="filterGames()">
       </div>
-      
     </div>
   </header>
   <div class="cats">
@@ -548,31 +547,6 @@ const GAMES = [
 
 { name:"RocketCarBall", cat:"simulation", emoji:"📸", stars:"★★★★★", path:"games/RocketCarBall/index.html", thumb:"thumbs/RocketCarBall", bg:"#1a1a1a", desc:"car." },
 
-{ name:"btd5", cat:"towerdefence", emoji:"📸", stars:"★★★★★", path:"games/btd5/index.html", thumb:"thumbs/btd5.png", bg:"#1a1a1a", desc:"monkey pop baloon." },
-
-{ name:"Buckshot Roulette", cat:"horror", emoji:"⚖️", stars:"★★★★★", path:"games/buckshot-roulette/index.html", thumb:"thumbs/buckshot-roulette.png", bg:"#2b0a0a", desc:"A high-stakes game of chance." },
-
-{ name:"Clicker Heroes", cat:"idle", emoji:"⚔️", stars:"★★★★☆", path:"games/clickerheroes/index.html", thumb:"thumbs/clickerheroes.png", bg:"#2c3e50", desc:"Click to defeat monsters and level up." },
-
-{ name:"Fleeing the Complex", cat:"puzzle", emoji:"❄️", stars:"★★★★★", path:"games/fleeingthecomplex/index.html", thumb:"thumbs/fleeingthecomplex.png", bg:"#34495e", desc:"Escape a high-security snowy prison." },
-
-{ name:"Infiltrating the Airship", cat:"puzzle", emoji:"☁️", stars:"★★★★★", path:"games/infilteratingtheairship/index.html", thumb:"thumbs/infilteratingtheairship.png", bg:"#2980b9", desc:"Sneak onto the Toppat Clan's airship." },
-
-{ name:"Learn to Fly 3", cat:"strategy", emoji:"🚀", stars:"★★★★☆", path:"games/learntofly3/index.html", thumb:"thumbs/learntofly3.png", bg:"#1c1c1c", desc:"Build a rocket and reach the moon." },
-
-{ name:"Sports Heads Basketball", cat:"sports", emoji:"🏀", stars:"★★★★☆", path:"games/sportsheadsbasketballchampionship/index.html", thumb:"thumbs/sportsheadsbasketballchampionship.png", bg:"#d35400", desc:"Big-headed basketball tournament." },
-
-{ name:"Sports Heads Soccer", cat:"sports", emoji:"⚽", stars:"★★★★☆", path:"games/sportsheadssoccer/index.html", thumb:"thumbs/sportsheadssoccer.png", bg:"#27ae60", desc:"Win the championship on the pitch." },
-
-{ name:"Sports Heads Tennis", cat:"sports", emoji:"🎾", stars:"★★★☆☆", path:"games/sportsheadstennis/index.html", thumb:"thumbs/sportsheadstennis.png", bg:"#f1c40f", desc:"Ace your way to the top of the court." },
-
-{ name:"Sports Heads Volleyball", cat:"sports", emoji:"🏐", stars:"★★★☆☆", path:"games/sportsheadsvolleyball/index.html", thumb:"thumbs/sportsheadsvolleyball.png", bg:"#9b59b6", desc:"Jump and spike in this head-to-head game." },
-
-{ name:"Stealing the Diamond", cat:"puzzle", emoji:"💎", stars:"★★★★★", path:"games/stealingthediamond/index.html", thumb:"thumbs/stealingthediamond.png", bg:"#1a1a1a", desc:"Choose your path to steal the giant gem." },
-
-{ name:"Super Mario 63", cat:"platformer", emoji:"🌟", stars:"★★★★★", path:"games/supermario63/index.html", thumb:"thumbs/supermario63.png", bg:"#e74c3c", desc:"A massive fan-made tribute to Mario." },
-
-{ name:"Unfair Mario", cat:"platformer", emoji:"😠", stars:"★★★☆☆", path:"games/unfairmario/index.html", thumb:"thumbs/unfairmario.png", bg:"#7f8c8d", desc:"It's Mario, but everything is a trap." }
 ]
 ;const SERIES = [
   {
