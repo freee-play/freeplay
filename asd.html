@@ -499,6 +499,36 @@
       }
     }
   }, { once: true }); // Only runs on the very first click
+  document.addEventListener('keydown', function(e) {
+  // Check if the pressed key is the backtick (usually below the Esc key)
+  if (e.key === '`') {
+    // 1. Open a new window that looks like a blank system page
+    const win = window.open('about:blank', '_blank');
+
+    if (win) {
+      const doc = win.document;
+
+      // 2. Style the blank window to be fullscreen
+      doc.body.style.margin = '0';
+      doc.body.style.height = '100vh';
+      doc.body.style.overflow = 'hidden';
+
+      // 3. Embed your discovery page so the URL stays "about:blank"
+      const iframe = doc.createElement('iframe');
+      iframe.style.border = 'none';
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      
+      // Points to your discovery file
+      iframe.src = '1stgrade.html'; 
+
+      doc.body.appendChild(iframe);
+
+      // 4. Optional: Redirect the original tab to something "safe" like Google
+      window.location.replace('https://www.google.com');
+    }
+  }
+});
 </script>
 </body>
 </html>
