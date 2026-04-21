@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0a0f">
 <title>SKIPCLASS.LOL — Unblocked Games</title>
 <meta name="description" content="Free unblocked games you can play anywhere. No sign up required.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230a0a0f'/><text y='24' x='4' font-size='22'>🎮</text></svg>">
@@ -185,11 +186,16 @@ select.settings-select{width:100%;background:var(--surface);border:1px solid var
 .modal-bg.is-fullscreen-bg{padding:0;}
 .modal-header{padding:0.7rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);gap:8px;flex-shrink:0;}
 .modal-title{font-family:'Orbitron',sans-serif;font-size:0.85rem;letter-spacing:3px;color:var(--neon);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.modal-controls{display:flex;gap:6px;flex-shrink:0;}
+.modal-controls{display:flex;gap:6px;flex-shrink:0;align-items:center;}
 .ctrl-btn{background:none;border:1px solid var(--border);border-radius:4px;color:var(--muted);font-family:'Space Mono',monospace;font-size:0.65rem;padding:4px 10px;cursor:pointer;letter-spacing:1px;transition:all 0.15s;white-space:nowrap;}
 .ctrl-btn:hover{border-color:var(--neon);color:var(--neon);}
 .ctrl-btn.close-btn:hover{border-color:var(--neon3);color:var(--neon3);}
-.modal iframe{flex:1;border:none;background:#000;width:100%;}
+/* FPS counter styles */
+.fps-display{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:2px;padding:4px 10px;border-radius:4px;border:1px solid rgba(0,245,196,0.3);background:rgba(0,0,0,0.4);color:var(--neon);min-width:72px;text-align:center;transition:color 0.3s,border-color 0.3s;}
+.fps-display.fps-warn{color:#f0a500;border-color:rgba(240,165,0,0.4);}
+.fps-display.fps-bad{color:#ff4d6d;border-color:rgba(255,77,109,0.4);}
+.modal-frame-wrap{position:relative;flex:1;display:flex;flex-direction:column;}
+.modal-frame-wrap iframe{flex:1;border:none;background:#000;width:100%;}
 footer{text-align:center;padding:1.5rem 2rem;border-top:1px solid var(--border);color:var(--muted);font-size:0.62rem;letter-spacing:2px;}
 @media(max-width:640px){
   .sidebar{display:none;}
@@ -229,9 +235,8 @@ footer{text-align:center;padding:1.5rem 2rem;border-top:1px solid var(--border);
     <div class="header-row">
       <div class="search-wrap">
         <span class="search-icon">⌕</span>
-        <input type="text" id="search" placeholder="Search games..." <input type="text" id="search" placeholder="Search games..." oninput="debouncedFilter()">
+        <input type="text" id="search" placeholder="Search games..." oninput="debouncedFilter()">
       </div>
-      
     </div>
   </header>
   <div class="cats">
@@ -242,6 +247,7 @@ footer{text-align:center;padding:1.5rem 2rem;border-top:1px solid var(--border);
     <div class="cat" onclick="setCategory('arcade',this)">Arcade</div>
     <div class="cat" onclick="setCategory('idle',this)">Idle</div>
     <div class="cat" onclick="setCategory('strategy',this)">Strategy</div>
+    <div class="cat" onclick="setCategory('multiplayer',this)">Multiplayer</div>
   </div>
   <div class="body-wrap">
     <div class="sidebar">
@@ -317,16 +323,25 @@ footer{text-align:center;padding:1.5rem 2rem;border-top:1px solid var(--border);
     <div class="modal-header">
       <div class="modal-title" id="modal-title">GAME</div>
       <div class="modal-controls">
+        <!-- FPS counter lives here in the header bar -->
+        <div class="fps-display" id="fps-display">-- FPS</div>
         <button class="ctrl-btn" onclick="copyGameLink()">🔗 SHARE</button>
         <button class="ctrl-btn" onclick="reloadGame()">↺ RELOAD</button>
         <button class="ctrl-btn" onclick="toggleFullscreen()" id="fs-btn">⛶ FULLSCREEN</button>
         <button class="ctrl-btn close-btn" onclick="closeModal(null)">✕ CLOSE</button>
       </div>
     </div>
-    <iframe id="modal-frame" src="" allowfullscreen></iframe>
+    <div class="modal-frame-wrap">
+      <iframe id="modal-frame" src="" allowfullscreen title="Game frame"
+        allow="autoplay; fullscreen; pointer-lock"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-popups"></iframe>
+    </div>
   </div>
 </div>
 <script>
+let _searchTimer;
+function debouncedFilter(){clearTimeout(_searchTimer);_searchTimer=setTimeout(filterGames,150);}
+
 const POPULAR_NAMES = ['There Is No Game','Drive Mad','Grindcraft','Subway Surfers','OvO','Boxel Rebound'];
 const TRENDING_NAMES = ['Krunker','Happy Wheels','Grindcraft','Friday Night Funkin','Pandemic 2'];
 
@@ -352,6 +367,8 @@ const GAMES = [
 
 { name:"Ballz", cat:"arcade", emoji:"⚪", stars:"★★★☆☆", path:"games/ballz/index.html", thumb:"thumbs/ballz.png", bg:"#1a1a1a", desc:"Break blocks with balls." },
 
+{ name:"Basketball Legends", cat:"sports", emoji:"🏀", stars:"★★★★★", path:"games/basketball-legends-2020/index.html", thumb:"thumbs/basketball-legends-2020.png", bg:"#1a2a3a", desc:"Arcade basketball." },
+
 { name:"Binding of Isaac", cat:"action", emoji:"👁️", stars:"★★★★★", path:"games/binding-of-isaac/index.html", thumb:"thumbs/binding-of-isaac.png", bg:"#2a1a1a", desc:"Dungeon roguelike." },
 
 { name:"BitLife", cat:"simulation", emoji:"📱", stars:"★★★★★", path:"games/bitlife/index.html", thumb:"thumbs/bitlife.png", bg:"#2a1a2a", desc:"Life simulator." },
@@ -360,11 +377,15 @@ const GAMES = [
 
 { name:"Boxel Rebound", cat:"arcade", emoji:"🟦", stars:"★★★★☆", path:"games/boxel-rebound/index.html", thumb:"thumbs/boxel-rebound.png", bg:"#0f172a", desc:"Obstacle jumping." },
 
+{ name:"Boxhead 2Play", cat:"action", emoji:"🧟", stars:"★★★★★", path:"games/boxhead2play/index.html", thumb:"thumbs/boxhead2play.png", bg:"#1a1a1a", desc:"Zombie shooter." },
+
 { name:"Breaking the Bank", cat:"adventure", emoji:"💰", stars:"★★★★☆", path:"games/breakingthebank/index.html", thumb:"thumbs/breakingthebank.png", bg:"#1a2a1a", desc:"Choose your plan." },
 
 { name:"Breakout", cat:"arcade", emoji:"🧱", stars:"★★★★☆", path:"games/breakout/index.html", thumb:"thumbs/breakout.png", bg:"#000", desc:"Break bricks." },
 
 { name:"Chrome Dino", cat:"arcade", emoji:"🦖", stars:"★★★★★", path:"games/chrome-dino/index.html", thumb:"thumbs/chrome-dino.png", bg:"#f4f4f4", desc:"Jump obstacles." },
+
+{ name:"Cookie Clicker", cat:"idle", emoji:"🍪", stars:"★★★★★", path:"games/cookie-clicker/index.html", thumb:"thumbs/cookie-clicker.png", bg:"#3e2723", desc:"Grow your cookie empire." },
 
 { name:"Crossy Road", cat:"arcade", emoji:"🐔", stars:"★★★★★", path:"games/crossyroad/index.html", thumb:"thumbs/crossyroad.png", bg:"#2a3a1a", desc:"Cross roads safely." },
 
@@ -378,9 +399,11 @@ const GAMES = [
 
 { name:"Flappy Bird", cat:"arcade", emoji:"🐤", stars:"★★★★★", path:"games/flappy-bird/index.html", thumb:"thumbs/flappy-bird.png", bg:"#70c5ce", desc:"Avoid pipes." },
 
-{ name:"Friday Night Funkin", cat:"music", emoji:"🎤", stars:"★★★★★", path:"games/fridaynightfunkin/index.html", thumb:"thumbs/fridaynightfunkin.png", bg:"#1a0f2a", desc:"Rhythm battles." },
+{ name:"Friday Night Funkin", cat:"music", emoji:"🎤", stars:"★★★★★", path:"games/friday-night-funkin/index.html", thumb:"thumbs/friday-night-funkin.png", bg:"#1a0f2a", desc:"Rhythm battles." },
 
 { name:"Getaway Shootout", cat:"action", emoji:"🔫", stars:"★★★★★", path:"games/getawayshootout/index.html", thumb:"thumbs/getawayshootout.png", bg:"#2a1a1a", desc:"Race and shoot." },
+
+{ name:"Google Snake", cat:"arcade", emoji:"🐍", stars:"★★★★☆", path:"games/google-snake/index.html", thumb:"thumbs/google-snake.png", bg:"#1a2a1a", desc:"Classic snake." },
 
 { name:"Krunker", cat:"shooter", emoji:"🎯", stars:"★★★★★", path:"games/krunker/index.html", thumb:"thumbs/krunker.png", bg:"#1a1a1a", desc:"FPS action." },
 
@@ -414,6 +437,8 @@ const GAMES = [
 
 { name:"BTTS", cat:"action", emoji:"⚔️", stars:"★★★☆☆", path:"games/btts/index.html", thumb:"thumbs/btts.png", bg:"#1a1a1a", desc:"Fast-paced action gameplay." },
 
+{ name:"Burning Man 2", cat:"action", emoji:"🔥", stars:"★★★☆☆", path:"games/burning-man-2/index.html", thumb:"thumbs/burning-man-2.png", bg:"#2a1a0a", desc:"Burn everything in sight." },
+
 { name:"Cannon Basketball 4", cat:"puzzle", emoji:"🏀", stars:"★★★★☆", path:"games/cannon-basketball-4/index.html", thumb:"thumbs/cannon-basketball-4.png", bg:"#1a2a3a", desc:"Shoot balls into hoops." },
 
 { name:"Color Switch", cat:"arcade", emoji:"🎨", stars:"★★★★☆", path:"games/color-switch-2-challenges/index.html", thumb:"thumbs/color-switch-2-challenges.png", bg:"#1a1a2a", desc:"Match colors to pass." },
@@ -439,6 +464,8 @@ const GAMES = [
 { name:"Fluid Simulation", cat:"sandbox", emoji:"🌊", stars:"★★★★☆", path:"games/fluid/index.html", thumb:"thumbs/fluid.png", bg:"#000", desc:"Play with fluids." },
 
 { name:"Geometry Dash (Alt)", cat:"arcade", emoji:"🟦", stars:"★★★★☆", path:"games/geodash/index.html", thumb:"thumbs/geodash.png", bg:"#0f172a", desc:"Dash through levels." },
+
+{ name:"Geometry Dash 2", cat:"arcade", emoji:"🟦", stars:"★★★★☆", path:"games/geodash-2/index.html", thumb:"thumbs/geodash-2.png", bg:"#0f172a", desc:"More dash levels." },
 
 { name:"Getting Over It", cat:"rage", emoji:"🪨", stars:"★★★★★", path:"games/getting-over-it/index.html", thumb:"thumbs/getting-over-it.png", bg:"#1a1a1a", desc:"Climb with a hammer." },
 
@@ -469,6 +496,8 @@ const GAMES = [
 { name:"My Friend Pedro", cat:"action", emoji:"🍌", stars:"★★★★★", path:"games/my-friend-pedro/index.html", thumb:"thumbs/my-friend-pedro.png", bg:"#1a1a1a", desc:"Slow-mo shooting." },
 
 { name:"N-Gon", cat:"action", emoji:"🔺", stars:"★★★★☆", path:"games/n-gon/index.html", thumb:"thumbs/n-gon.png", bg:"#000", desc:"Physics shooter." },
+
+{ name:"Offline Paradise", cat:"idle", emoji:"🏝️", stars:"★★★☆☆", path:"games/OfflineParadise/index.html", thumb:"thumbs/OfflineParadise.png", bg:"#2a3a1a", desc:"Idle paradise builder." },
 
 { name:"osu!", cat:"music", emoji:"🎵", stars:"★★★★★", path:"games/osu/index.html", thumb:"thumbs/osu.png", bg:"#1a1a2a", desc:"Rhythm clicking game." },
 
@@ -518,6 +547,8 @@ const GAMES = [
 
 { name:"Time Shooter 3", cat:"action", emoji:"⏱️", stars:"★★★★★", path:"games/time-shooter-3/index.html", thumb:"thumbs/time-shooter-3.png", bg:"#1a1a1a", desc:"Time-based shooting." },
 
+{ name:"Tomb of the Mask", cat:"arcade", emoji:"🟨", stars:"★★★★★", path:"games/tombofthemask/index.html", thumb:"thumbs/tombofthemask.png", bg:"#1a0a2a", desc:"Fast maze climbing." },
+
 { name:"Tower Master", cat:"arcade", emoji:"🏗️", stars:"★★★☆☆", path:"games/towermaster/index.html", thumb:"thumbs/towermaster.png", bg:"#1a1a1a", desc:"Stack towers." },
 
 { name:"Trimps", cat:"idle", emoji:"📈", stars:"★★★★☆", path:"games/trimps/index.html", thumb:"thumbs/trimps.png", bg:"#1a1a1a", desc:"Idle progression game." },
@@ -529,74 +560,95 @@ const GAMES = [
 { name:"We Become What We Behold", cat:"simulation", emoji:"📸", stars:"★★★★★", path:"games/we_become_what_we_behold/index.html", thumb:"thumbs/we_become_what_we_behold.png", bg:"#1a1a1a", desc:"Media simulation." },
 
 { name:"Wolfenstein 3D", cat:"shooter", emoji:"🔫", stars:"★★★★★", path:"games/wolf3d/index.html", thumb:"thumbs/wolf3d.png", bg:"#000", desc:"Classic FPS." },
-]
-;const SERIES = [
+
+{ name:"Cubes 2048", cat:"io", emoji:"🧊", stars:"★★★★☆", path:"games/cubes2048/index.html", thumb:"thumbs/cubes2048.png", bg:"#3d5afe", desc:"Merge cubes to grow in this 3D arena." },
+
+{ name:"Fleeing the Complex", cat:"adventure", emoji:"🏃", stars:"★★★★★", path:"games/fleeingthecomplex/index.html", thumb:"thumbs/fleeingthecomplex.png", bg:"#34495e", desc:"Choose your path to escape the wall." },
+
+{ name:"Worlds Hardest Game 2", cat:"platformer", emoji:"🏝️", stars:"★★★☆☆", path:"games/worlds-hardest-game-2/index.html", thumb:"thumbs/worlds-hardest-game-2.png", bg:"#00d2ff", desc:"Tropical platforming challenges." },
+
+{ name:"Sports Heads Basketball", cat:"sports", emoji:"🏀", stars:"★★★★☆", path:"games/sportsheadsbasketballchampionship/index.html", thumb:"thumbs/sportsheadsbasketballchampionship.png", bg:"#e67e22", desc:"Big-headed basketball tournament action." },
+
+{ name:"Sports Heads Soccer", cat:"sports", emoji:"⚽", stars:"★★★★☆", path:"games/sportsheadssoccer/index.html", thumb:"thumbs/sportsheadssoccer.png", bg:"#27ae60", desc:"Soccer showdown with power-ups." },
+
+{ name:"Sports Heads Tennis", cat:"sports", emoji:"🎾", stars:"★★★☆☆", path:"games/sportsheadstennis/index.html", thumb:"thumbs/sportsheadstennis.png", bg:"#badc58", desc:"Fast-paced court battles." },
+
+{ name:"Sports Heads Volleyball", cat:"sports", emoji:"🏐", stars:"★★★☆☆", path:"games/sportsheadsvolleyball/index.html", thumb:"thumbs/sportsheadsvolleyball.png", bg:"#f9ca24", desc:"Jump and spike to victory." },
+
+{ name:"Stealing the Diamond", cat:"adventure", emoji:"💎", stars:"★★★★★", path:"games/stealingthediamond/index.html", thumb:"thumbs/stealingthediamond.png", bg:"#2980b9", desc:"Execute the ultimate heist." },
+
+{ name:"Super Mario 63", cat:"adventure", emoji:"🍄", stars:"★★★★★", path:"games/supermario63/index.html", thumb:"thumbs/supermario63.png", bg:"#ff0000", desc:"The legendary fan-made platformer." },
+
+{ name:"Unfair Mario", cat:"platformer", emoji:"⚠️", stars:"★★★☆☆", path:"games/unfairmario/index.html", thumb:"thumbs/unfairmario.png", bg:"#000000", desc:"Try not to rage in this trap-filled world." },
+
+{ name:"BTD5", cat:"strategy", emoji:"🐒", stars:"★★★★★", path:"games/btd5/index.html", thumb:"thumbs/btd5.png", bg:"#00b894", desc:"Defend your base against the balloon invasion." },
+
+{ name:"Clicker Heroes", cat:"idle", emoji:"⚔️", stars:"★★★★★", path:"games/clickerheroes/index.html", thumb:"thumbs/clickerheroes.png", bg:"#e74c3c", desc:"Defeat monsters and level up your heroes." },
+
+];
+
+const SERIES = [
   {
   name:"Moto X3M Series", emoji:"🏍️", color:"#ff4d6d", bg:"#2a0a0a",
   games:[
-    { name:"Moto X3M", path:"games/motox3m/index.html", thumb:"games/motox3m/thumb.png" },
-    { name:"Moto X3M 2", path:"games/motox3m2/index.html", thumb:"games/motox3m2/thumb.png" },
-    { name:"Moto X3M Winter", path:"games/motox3m-winter/index.html", thumb:"games/motox3m-winter/thumb.png" },
-    { name:"Moto X3M Spooky", path:"games/motox3m-spooky/index.html", thumb:"games/motox3m-spooky/thumb.png" }
+    { name:"Moto X3M", path:"games/motox3m/index.html", thumb:"games/motox3m/thumb.png", emoji:"🏍️", bg:"#2a0a0a" },
+    { name:"Moto X3M 2", path:"games/motox3m2/index.html", thumb:"games/motox3m2/thumb.png", emoji:"🏍️", bg:"#2a0a0a" },
+    { name:"Moto X3M Winter", path:"games/motox3m-winter/index.html", thumb:"games/motox3m-winter/thumb.png", emoji:"❄️", bg:"#0a1a2a" },
+    { name:"Moto X3M Spooky", path:"games/motox3m-spooky/index.html", thumb:"games/motox3m-spooky/thumb.png", emoji:"🎃", bg:"#2a1a0a" }
   ]
 },
-
 {
   name:"Vex Series", emoji:"🟥", color:"#ff3b3b", bg:"#1a1a1a",
   games:[
-    { name:"Vex 3", path:"games/vex3/index.html", thumb:"games/vex3/thumb.png" },
-    { name:"Vex 4", path:"games/vex4/index.html", thumb:"games/vex4/thumb.png" },
-    { name:"Vex 5", path:"games/vex5/index.html", thumb:"games/vex5/thumb.png" },
-    { name:"Vex 6", path:"games/vex6/index.html", thumb:"games/vex6/thumb.png" },
-    { name:"Vex 7", path:"games/vex7/index.html", thumb:"games/vex7/thumb.png" }
+    { name:"Vex 3", path:"games/vex3/index.html", thumb:"games/vex3/thumb.png", emoji:"🟥", bg:"#1a1a1a" },
+    { name:"Vex 4", path:"games/vex4/index.html", thumb:"games/vex4/thumb.png", emoji:"🟥", bg:"#1a1a1a" },
+    { name:"Vex 5", path:"games/vex5/index.html", thumb:"games/vex5/thumb.png", emoji:"🟥", bg:"#1a1a1a" },
+    { name:"Vex 6", path:"games/vex6/index.html", thumb:"games/vex6/thumb.png", emoji:"🟥", bg:"#1a1a1a" },
+    { name:"Vex 7", path:"games/vex7/index.html", thumb:"games/vex7/thumb.png", emoji:"🟥", bg:"#1a1a1a" }
   ]
 },
-
 {
   name:"Duck Life Series", emoji:"🦆", color:"#ffd166", bg:"#2a2a1a",
   games:[
-    { name:"Duck Life", path:"games/ducklife1/index.html", thumb:"games/ducklife1/thumb.png" },
-    { name:"Duck Life 2", path:"games/ducklife2/index.html", thumb:"games/ducklife2/thumb.png" },
-    { name:"Duck Life 3", path:"games/ducklife3/index.html", thumb:"games/ducklife3/thumb.png" },
-    { name:"Duck Life 4", path:"games/ducklife4/index.html", thumb:"games/ducklife4/thumb.png" }
+    { name:"Duck Life", path:"games/ducklife1/index.html", thumb:"games/ducklife1/thumb.png", emoji:"🦆", bg:"#2a2a1a" },
+    { name:"Duck Life 2", path:"games/ducklife2/index.html", thumb:"games/ducklife2/thumb.png", emoji:"🦆", bg:"#2a2a1a" },
+    { name:"Duck Life 3", path:"games/ducklife3/index.html", thumb:"games/ducklife3/thumb.png", emoji:"🦆", bg:"#2a2a1a" },
+    { name:"Duck Life 4", path:"games/ducklife4/index.html", thumb:"games/ducklife4/thumb.png", emoji:"🦆", bg:"#2a2a1a" }
   ]
 },
-
 {
   name:"Bloons Series", emoji:"🎈", color:"#4caf50", bg:"#2a3a1a",
   games:[
-    { name:"Bloons TD", path:"games/bloonstd/index.html", thumb:"games/bloonstd/thumb.png" },
-    { name:"Bloons TD 2", path:"games/bloonstd2/index.html", thumb:"games/bloonstd2/thumb.png" },
-    { name:"Bloons TD 4", path:"games/btd4/index.html", thumb:"games/btd4/thumb.png" }
+    { name:"Bloons TD", path:"games/bloonstd/index.html", thumb:"games/bloonstd/thumb.png", emoji:"🎈", bg:"#2a3a1a" },
+    { name:"Bloons TD 2", path:"games/bloonstd2/index.html", thumb:"games/bloonstd2/thumb.png", emoji:"🎈", bg:"#2a3a1a" },
+    { name:"Bloons TD 4", path:"games/btd4/index.html", thumb:"games/btd4/thumb.png", emoji:"🎈", bg:"#2a3a1a" },
+    { name:"Bloons TD 5", path:"games/btd5/index.html", thumb:"thumbs/btd5.png", emoji:"🎈", bg:"#00b894" }
   ]
 },
-
 {
   name:"Learn to Fly Series", emoji:"🐧", color:"#5dade2", bg:"#1a2a3a",
   games:[
-    { name:"Learn to Fly", path:"games/learntofly/index.html", thumb:"games/learntofly/thumb.png" },
-    { name:"Learn to Fly 2", path:"games/learntofly2/index.html", thumb:"games/learntofly2/thumb.png" }
+    { name:"Learn to Fly", path:"games/learntofly/index.html", thumb:"games/learntofly/thumb.png", emoji:"🐧", bg:"#1a2a3a" },
+    { name:"Learn to Fly 2", path:"games/learntofly2/index.html", thumb:"games/learntofly2/thumb.png", emoji:"🐧", bg:"#1a2a3a" }
   ]
 },
-
 {
   name:"Impossible Quiz Series", emoji:"❓", color:"#9b59b6", bg:"#1a1a2a",
   games:[
-    { name:"The Impossible Quiz", path:"games/the-impossible-quiz/index.html", thumb:"games/the-impossible-quiz/thumb.png" },
-    { name:"The Impossible Quiz 2", path:"games/the-impossible-quiz-2/index.html", thumb:"games/the-impossible-quiz-2/thumb.png" }
+    { name:"The Impossible Quiz", path:"games/the-impossible-quiz/index.html", thumb:"games/the-impossible-quiz/thumb.png", emoji:"❓", bg:"#1a1a2a" },
+    { name:"The Impossible Quiz 2", path:"games/the-impossible-quiz-2/index.html", thumb:"games/the-impossible-quiz-2/thumb.png", emoji:"❓", bg:"#1a1a2a" }
   ]
 },
-
 {
   name:"Gun Mayhem Series", emoji:"🔫", color:"#555", bg:"#1a1a1a",
   games:[
-    { name:"Gun Mayhem", path:"games/gun-mayhem/index.html", thumb:"games/gun-mayhem/thumb.png" },
-    { name:"Gun Mayhem 2", path:"games/gun-mayhem-2/index.html", thumb:"games/gun-mayhem-2/thumb.png" }
+    { name:"Gun Mayhem", path:"games/gun-mayhem/index.html", thumb:"games/gun-mayhem/thumb.png", emoji:"🔫", bg:"#1a1a1a" },
+    { name:"Gun Mayhem 2", path:"games/gun-mayhem-2/index.html", thumb:"games/gun-mayhem-2/thumb.png", emoji:"🔫", bg:"#1a1a1a" }
   ]
 }
 ];
 
-const ALL_GAMES = [...GAMES,];
+const ALL_GAMES = [...GAMES];
 
 const ACHIEVEMENTS_DEF = [
   { id:'first_game',  icon:'🎮', name:'First Game',   desc:'Play your first game',         check: s => s.gamesPlayed >= 1 },
@@ -607,6 +659,7 @@ const ACHIEVEMENTS_DEF = [
   { id:'explorer',    icon:'🗺️', name:'Explorer',      desc:'Play 10 different games',      check: s => s.uniqueGames >= 10 },
   { id:'marathoner',  icon:'🏃', name:'Marathoner',    desc:'Play for 1 hour total',        check: s => s.minutesPlayed >= 60 },
 ];
+
 let activeCategory='all';
 let favs=JSON.parse(localStorage.getItem('fp_favs')||'[]');
 let ratings=JSON.parse(localStorage.getItem('fp_ratings')||'{}');
@@ -622,7 +675,43 @@ const fontLabels=['SMALL','MEDIUM','LARGE'];
 const fontScales=[0.85,1,1.15];
 let trendingGames=[];
 let secondsPlayed=parseInt(localStorage.getItem('fp_seconds')||'0');
+
+// ── FPS COUNTER ──────────────────────────────────────────────
+let fpsRafId=null;
+let fpsFrames=0;
+let fpsLastTime=performance.now();
+
+function fpsLoop(){
+  fpsFrames++;
+  const now=performance.now();
+  if(now-fpsLastTime>=500){
+    const fps=Math.round(fpsFrames/((now-fpsLastTime)/1000));
+    fpsFrames=0;
+    fpsLastTime=now;
+    const el=document.getElementById('fps-display');
+    el.textContent=fps+' FPS';
+    el.classList.remove('fps-warn','fps-bad');
+    if(fps<30) el.classList.add('fps-bad');
+    else if(fps<50) el.classList.add('fps-warn');
+  }
+  fpsRafId=requestAnimationFrame(fpsLoop);
+}
+function startFPS(){
+  fpsFrames=0;fpsLastTime=performance.now();
+  if(fpsRafId) cancelAnimationFrame(fpsRafId);
+  document.getElementById('fps-display').textContent='-- FPS';
+  document.getElementById('fps-display').classList.remove('fps-warn','fps-bad');
+  fpsRafId=requestAnimationFrame(fpsLoop);
+}
+function stopFPS(){
+  if(fpsRafId){cancelAnimationFrame(fpsRafId);fpsRafId=null;}
+  document.getElementById('fps-display').textContent='-- FPS';
+  document.getElementById('fps-display').classList.remove('fps-warn','fps-bad');
+}
+// ─────────────────────────────────────────────────────────────
+
 setInterval(()=>{
+  if(document.hidden) return;
   secondsPlayed++;
   localStorage.setItem('fp_seconds',secondsPlayed);
   const m=Math.floor(secondsPlayed/60);
@@ -630,6 +719,7 @@ setInterval(()=>{
   document.getElementById('time-display').textContent=`${m}:${s.toString().padStart(2,'0')}`;
   checkAchievements();
 },1000);
+
 function getOnlineCount(){
   const h=new Date().getHours();
   const base=(h>=8&&h<=15)?180:(h>=15&&h<=20)?120:40;
@@ -637,12 +727,14 @@ function getOnlineCount(){
 }
 document.getElementById('online-count').textContent=getOnlineCount();
 setInterval(()=>{document.getElementById('online-count').textContent=getOnlineCount();},8000);
+
 function pickTrending(){
   const shuffled=[...TRENDING_NAMES].sort(()=>Math.random()-0.5);
   trendingGames=shuffled.slice(0,3);
 }
 pickTrending();
 setInterval(pickTrending,300000);
+
 function addToRecent(name,path,thumb,emoji,bg){
   recentlyPlayed=recentlyPlayed.filter(r=>r.name!==name);
   recentlyPlayed.unshift({name,path,thumb,emoji,bg});
@@ -650,6 +742,7 @@ function addToRecent(name,path,thumb,emoji,bg){
   localStorage.setItem('fp_recent',JSON.stringify(recentlyPlayed));
   renderRecently();
 }
+
 function renderRecently(){
   const section=document.getElementById('recently-section');
   const grid=document.getElementById('recently-grid');
@@ -659,7 +752,7 @@ function renderRecently(){
     <div class="scroll-card" style="animation-delay:${i*50}ms" onclick="openGame('${g.name}','${g.path}')">
       <div class="hover-overlay"><button class="hover-play-btn">▶</button></div>
       <div class="scroll-thumb" style="background:${g.bg};">
-        ${g.thumb?`<img src="thumbs/${g.thumb}" alt="${g.name}" loading="lazy">`:`<span class="thumb-emoji">${g.emoji}</span>`}
+        ${g.thumb?`<img src="thumbs/${g.thumb}" alt="${g.name} thumbnail" loading="lazy" width="150" height="100" onerror="this.style.display='none'">`:`<span class="thumb-emoji">${g.emoji}</span>`}
       </div>
       <div class="scroll-info">
         <div class="scroll-name">${g.name}</div>
@@ -668,6 +761,7 @@ function renderRecently(){
     </div>
   `).join('');
 }
+
 function renderPopular(){
   const grid=document.getElementById('popular-grid');
   const popularGames=POPULAR_NAMES.map(n=>ALL_GAMES.find(g=>g.name===n)).filter(Boolean);
@@ -676,7 +770,7 @@ function renderPopular(){
       <div class="scroll-rank">#${i+1}</div>
       <div class="hover-overlay"><button class="hover-play-btn">▶</button></div>
       <div class="scroll-thumb" style="background:${g.bg};">
-        ${g.thumb?`<img src="thumbs/${g.thumb}" alt="${g.name}" loading="lazy">`:`<span class="thumb-emoji">${g.emoji}</span>`}
+        ${g.thumb?`<img src="${g.thumb}" alt="${g.name} thumbnail" loading="lazy" width="150" height="100" onerror="this.style.display='none'">`:`<span class="thumb-emoji">${g.emoji}</span>`}
       </div>
       <div class="scroll-info">
         <div class="scroll-name">${g.name}</div>
@@ -685,9 +779,11 @@ function renderPopular(){
     </div>
   `).join('');
 }
+
 function getAchievementStats(){
   return{gamesPlayed:sessionGamesPlayed,gamesRated:Object.keys(ratings).length,minutesPlayed:Math.floor(secondsPlayed/60),gamesFaved:favs.length,uniqueGames:uniqueGamesPlayed.length};
 }
+
 function checkAchievements(){
   const stats=getAchievementStats();
   ACHIEVEMENTS_DEF.forEach(a=>{
@@ -699,6 +795,7 @@ function checkAchievements(){
     }
   });
 }
+
 function openAchievements(){
   const list=document.getElementById('achievements-list');
   list.innerHTML=ACHIEVEMENTS_DEF.map(a=>{
@@ -719,6 +816,7 @@ function closeAchievementsOutside(e){if(e.target===document.getElementById('achi
 function openSettings(){document.getElementById('settings-overlay').classList.add('open');}
 function closeSettings(){document.getElementById('settings-overlay').classList.remove('open');}
 function closeSettingsOutside(e){if(e.target===document.getElementById('settings-overlay'))closeSettings();}
+
 function setTheme(theme){
   document.body.classList.toggle('light-mode',theme==='light');
   document.getElementById('btn-dark').classList.toggle('active',theme==='dark');
@@ -786,6 +884,7 @@ function rateGame(name,stars,el){
   checkAchievements();
   showToast(`★ RATED ${name.toUpperCase()} ${stars}/5`);
 }
+
 (function(){
   const theme=localStorage.getItem('fp_theme');
   if(theme)setTheme(theme);
@@ -794,7 +893,9 @@ function rateGame(name,stars,el){
   const neon=localStorage.getItem('fp_neon');
   if(neon)document.documentElement.style.setProperty('--neon',neon);
 })();
+
 function saveFavs(){localStorage.setItem('fp_favs',JSON.stringify(favs));}
+
 function setCategory(cat,el){
   activeCategory=cat;
   document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));
@@ -807,6 +908,7 @@ function setCategory(cat,el){
   renderRecently();
   filterGames();
 }
+
 function filterGames(){
   const q=document.getElementById('search').value.toLowerCase();
   let standaloneList=[...GAMES];
@@ -837,33 +939,33 @@ function filterGames(){
     document.getElementById('game-grid-2').innerHTML='';
   }
 }
+
 function renderItems(items,gridId){
   const grid=document.getElementById(gridId);
   if(!items.length){grid.innerHTML='';return;}
   grid.innerHTML=items.map((item,i)=>item.type==='series'?renderSeriesCard(item.data,item.idx,i):renderGameCard(item.data,i)).join('');
 }
-function renderGameCard(g, i) {
-  const isFav = favs.includes(g.name);
-  const isRecent = recentlyPlayed.some(r => r.name === g.name);
-  const userRating = ratings[g.name] || 0;
-  const stars = [1, 2, 3, 4, 5].map(s => `<span class="star ${userRating >= s ? 'on' : ''}" onclick="rateGame('${g.name}',${s},this)">★</span>`).join('');
-  
-  let badge = '';
-  if (g.isNew) badge = `<div class="new-badge">NEW</div>`;
-  else if (isRecent) badge = `<div class="trending-badge" style="background:rgba(0,245,196,0.9);color:#0a0a1a;">🕐 RECENT</div>`;
 
-  return `<div class="card" style="animation-delay:${i * 40}ms">
+function renderGameCard(g,i){
+  const isFav=favs.includes(g.name);
+  const isRecent=recentlyPlayed.some(r=>r.name===g.name);
+  const userRating=ratings[g.name]||0;
+  const stars=[1,2,3,4,5].map(s=>`<span class="star ${userRating>=s?'on':''}" onclick="rateGame('${g.name}',${s},this)">★</span>`).join('');
+  let badge='';
+  if(g.isNew)badge=`<div class="new-badge">NEW</div>`;
+  else if(isRecent)badge=`<div class="trending-badge" style="background:rgba(0,245,196,0.9);color:#0a0a1a;">🕐 RECENT</div>`;
+  return`<div class="card" style="animation-delay:${i*40}ms">
     ${badge}
-    <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav('${g.name}',event)">${isFav ? '★' : '☆'}</button>
+    <button class="fav-btn ${isFav?'active':''}" onclick="toggleFav('${g.name}',event)">${isFav?'★':'☆'}</button>
     <div class="card-thumb" style="background:${g.bg};" onclick="openGame('${g.name}','${g.path}')">
       <div class="hover-overlay"><button class="hover-play-btn">▶</button></div>
-      ${g.thumb ? `<img src="${g.thumb}" alt="${g.name}" loading="lazy">` : `<span class="thumb-emoji">${g.emoji}</span>`}
+      ${g.thumb?`<img src="${g.thumb}" alt="${g.name} thumbnail" loading="lazy" width="190" height="130" onerror="this.style.display='none'">`:`<span class="thumb-emoji">${g.emoji}</span>`}
     </div>
     <div class="card-info">
       <div class="card-name">${g.name}</div>
-      ${g.desc ? `<div class="card-desc">${g.desc}</div>` : ''}
+      ${g.desc?`<div class="card-desc">${g.desc}</div>`:''}
       <div class="card-meta">
-        <span class="card-cat">${g.cat || g.seriesName || ''}</span>
+        <span class="card-cat">${g.cat||g.seriesName||''}</span>
         <div class="star-rating">${stars}</div>
       </div>
       <button class="play-btn" onclick="openGame('${g.name}','${g.path}')">▶ PLAY</button>
@@ -878,13 +980,13 @@ function renderSeriesCard(s,si,i){
     const isFav=favs.includes(g.name);
     return`<div class="series-mini-card">
       <button class="mini-fav ${isFav?'active':''}" onclick="toggleFav('${g.name}',event)">${isFav?'★':'☆'}</button>
-      <div class="mini-thumb" style="background:${g.bg};" onclick="openGame('${g.name}','${g.path}')">
+      <div class="mini-thumb" style="background:${g.bg||'#1a1a1a'};" onclick="openGame('${g.name}','${g.path}')">
         <div class="hover-overlay"><button class="hover-play-btn" style="width:32px;height:32px;font-size:0.9rem;">▶</button></div>
-        <span class="mini-emoji">${g.emoji}</span>
+        ${g.thumb?`<img src="${g.thumb}" alt="${g.name} thumbnail" loading="lazy" width="160" height="90" onerror="this.style.display='none'">`:`<span class="mini-emoji">${g.emoji||'🎮'}</span>`}
       </div>
       <div class="mini-info">
         <div class="mini-name">${g.name}</div>
-        <div class="mini-stars">${g.stars}</div>
+        <div class="mini-stars">${g.stars||'★★★★☆'}</div>
         <button class="mini-play" onclick="openGame('${g.name}','${g.path}')">▶ PLAY</button>
       </div>
     </div>`;
@@ -903,6 +1005,7 @@ function renderSeriesCard(s,si,i){
     <div class="series-games-grid ${isOpen?'':'collapsed'}">${gamesHtml}</div>
   </div>`;
 }
+
 function toggleSeries(si){seriesOpen[si]=!seriesOpen[si];filterGames();}
 function toggleFav(name,e){
   e.stopPropagation();
@@ -923,6 +1026,7 @@ function openGame(name,path){
   localStorage.setItem('fp_unique',JSON.stringify(uniqueGamesPlayed));
   addToRecent(name,path,game.thumb||null,game.emoji||'🎮',game.bg||'#1a1a2e');
   checkAchievements();
+  startFPS(); // start FPS counter when game opens
 }
 function reloadGame(){const f=document.getElementById('modal-frame');f.src=f.src;}
 function toggleFullscreen(){
@@ -936,12 +1040,16 @@ function closeModal(e){
   document.getElementById('modal').classList.remove('open','is-fullscreen-bg');
   document.getElementById('modal-inner').classList.remove('is-fullscreen');
   document.getElementById('modal-frame').src='';isFS=false;
+  stopFPS(); // stop FPS counter when modal closes
 }
+
 document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
   if(e.key==='Escape'){closeModal(null);closeSettings();closeAchievements();}
-if(e.key==='k'||e.key==='K')window.location.href='https://www.google.com';
-if(e.key==='`')openAboutBlank();
+  if(e.key==='k'||e.key==='K') window.location.href='https://www.google.com';
+  if(e.key==='`') openAboutBlank();
 });
+
 renderPopular();renderRecently();filterGames();
 </script>
 </body>
